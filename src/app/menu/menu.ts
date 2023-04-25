@@ -10,11 +10,11 @@ export const menu: CoreMenu[] = [
     url: "home",
   },
   {
-    id: "reglement",
-    title: "Reglements",
+    id: "appeloffre",
+    title: "AppelsOffres",
     type: "item",
     icon: "inbox",
-    url: "reglement",
+    url: "appeloffre",
   },
   {
     id: 'Produit',

@@ -5,14 +5,19 @@ import { AdminModule } from "./main/Modules/Admin/admin.module";
 import { ProfileModule } from "./main/Modules/profile/profile.module";
 
 
-
 const routes: Routes = [
   {
     path: "pages",
     loadChildren: () =>
       import("./main/pages/pages.module").then((m) => m.PagesModule),
   },
-  
+  {
+    path: "appeloffre",
+    loadChildren: () =>
+      import("./main/Modules/appeloffre/appeloffre.module").then(
+        (m) => m.AppeloffreModule
+      ),
+  },
   {
     path: "",
     redirectTo: "/home",
