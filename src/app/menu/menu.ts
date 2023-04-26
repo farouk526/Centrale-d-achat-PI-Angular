@@ -17,8 +17,15 @@ export const menu: CoreMenu[] = [
     url: "appeloffre",
   },
   {
-    id: 'Produit',
-    title: 'Produit',
+    id: "commande",
+    title: "Commandes",
+    type: "item",
+    icon: "inbox",
+    url: "commande",
+  },
+  {
+    id: 'Offres',
+    title: 'Offres',
     type: 'collapsible',
     icon: 'shopping-cart',
     badge: {
@@ -27,18 +34,18 @@ export const menu: CoreMenu[] = [
     },
     children: [
       {
-        id: 'Home',
-        title: 'Home',
+        id: 'OffreProduit',
+        title: 'OffreProduit',
         type: 'item',
         icon: 'layers',
-        url: sed+'home'
+        url: sed+'OffreProduit'
       },
       {
-        id: 'List',
-        title: 'List',
+        id: 'OffreService',
+        title: 'OffreService',
         type: 'item',
         icon: 'archive',
-        url: sed+"list"
+        url: sed+"OffreService"
       }
     ]
   },

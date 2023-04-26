@@ -1,1 +1,131 @@
-<p>commande works!</p>
+<h3>List Of Orders </h3>
+<div id="content" #content> 
+    <table class="table" >
+        <thead>
+          <tr>
+            <th >Id</th>
+            <th >clientcin</th>
+            <th >client</th>
+            <th >respClient</th>
+            <th >adresseclient</th>
+            <th >devise</th>
+            <th >dateCreation</th>
+            <th >totalttc</th>
+            <th >Facture</th>
+            <th >Archive</th>
+            <!--th >archive</th-->
+            <th >Actions</th> 
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor="let commande of Commandes">
+              <td>{{commande.id}}</td>
+              <td>{{commande.clientcin}}</td>
+              <td> {{commande.client}} </td>
+              <td> {{commande.reponsableclient}} </td>
+              <td> {{commande.adresseclient}} </td>
+              <td> {{commande.devise}} </td>
+              <td> {{commande.dateCreation}} </td>
+              <td> {{commande.totalttc}} </td>
+              <td> {{commande.facture.client}} </td>
+           
+              <td *ngIf=" commande.archive =='1'" [ngStyle]="{'color':'green'}">Accepte</td>
+              <td *ngIf=" commande.archive =='0'" [ngStyle]="{'color':'red'}">Refusé</td>
+              
+              <td>
+                  <button class="btn btn-sm btn-danger" (click)="delete(commande.id)" >
+                      Delete
+                  </button>
+    
+              </td>
+          </tr>
+      </tbody>
+      </table>
+  </div>
+  <h3>Add Order</h3>
+<div class="container">
+    <form #f="ngForm">
+        <p></p>
+        <div class="form-group">
+            <label>clientcin</label>
+            <input type="text" name="clientcin" class="form-control" [(ngModel)]="commande.clientcin" #n="ngModel" required minlength="8">
+            <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+            <div *ngIf="n.errors?.['required']"> 
+                le clientcin est obligatoire
+            </div>
+            <div *ngIf="n.errors?.['minlength']">
+                le clientcin contient au minimum 8 caractères
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <label>client</label>
+            <input type="text" name="client" class="form-control" [(ngModel)]="commande.client" #p="ngModel" required> 
+            <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+            le nom de client est obligatoire
+          </div>
+        </div>
+        <p></p>
+
+        <div class="form-group">
+            <label>responsableclient</label>
+            <input type="text" name="reponsableclient" class="form-control" [(ngModel)]="commande.reponsableclient" #ps="ngModel" required>
+          <div class="alert alert-danger" *ngIf="ps.invalid && ps.touched">
+            le responsableclient est obligatoire
+          </div>
+        </div>
+          <p></p>
+          
+        <div class="form-group">
+          <label>adresseclient</label>
+          <input type="text" name="adresseclient" class="form-control" [(ngModel)]="commande.adresseclient" #pt="ngModel" required>
+        <div class="alert alert-danger" *ngIf="pt.invalid && pt.touched">
+          l'adresseclient est obligatoire
+        </div>
+      </div>
+      <p></p> 
+      <div class="form-group">
+        <label>devise</label>
+        <input type="text" name="devise" class="form-control" [(ngModel)]="commande.devise" #qm="ngModel" required>
+      <div class="alert alert-danger" *ngIf="qm.invalid && qm.touched">
+        la devise est obligatoire
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>dateCreation</label>
+      <input type="date" name="dateCreation" class="form-control" [(ngModel)]="commande.dateCreation" required>
+  </div>
+  <p></p>
+  <div class="form-group">
+    <label>totalttc</label>
+    <input type="number" name="totalttc" class="form-control" [(ngModel)]="commande.totalttc" #tt="ngModel" required>
+  <div class="alert alert-danger" *ngIf="tt.invalid && tt.touched">
+    le total TTC est obligatoire
+  </div> 
+</div>
+
+<div class="mb-3">
+  <label for="facture" class="form-label">facture</label>
+  <select class="form-select" aria-label="Default select example" name="facture" [(ngModel)]="commande.facture" id="facture">
+    <option *ngFor="let facture of Factures" [ngValue]="{id: facture.id}" >{{facture.client}}</option>
+  </select>
+</div>
+<div class="form-group">
+  <label for="archive" class="form-label">archive</label>
+  <select class="form-select" aria-label="Default select example" name="archive" [(ngModel)]="commande.archive" id="archive">
+    <option selected>Choose archive</option>
+    <option value="true">yes</option>
+    <option value="false">no</option>
+  </select>
+</div>
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="save()">
+            Add
+        </button>
+     
+    </form>
+
+</div>
+<p></p>

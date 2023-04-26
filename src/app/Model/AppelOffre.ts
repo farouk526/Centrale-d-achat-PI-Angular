@@ -1,11 +1,10 @@
 export class AppelOffre 
     {
-        idAppelOffre: number
+        id: number
         nom: string
         objet: string
         description:string
         prixTotal:number
         quantiteMin: number
-        accepte: boolean
-        
+       
     }

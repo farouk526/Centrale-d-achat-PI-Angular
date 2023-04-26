@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AdminModule } from "./main/Modules/Admin/admin.module";
 
 import { ProfileModule } from "./main/Modules/profile/profile.module";
+import { HomeComponent } from "./main/Modules/home/home.component";
 
 
 const routes: Routes = [
@@ -17,6 +18,24 @@ const routes: Routes = [
       import("./main/Modules/appeloffre/appeloffre.module").then(
         (m) => m.AppeloffreModule
       ),
+  },
+  {
+    path: "commande",
+    loadChildren: () =>
+      import("./main/Modules/commande/commande.module").then(
+        (m) => m.CommandeModule
+      ),
+  },
+  {
+    path: "facture",
+    loadChildren: () =>
+      import("./main/Modules/facture/facture.module").then(
+        (m) => m.FactureModule
+      ),
+  },
+  {
+    path: "home",
+    component: HomeComponent,
   },
   {
     path: "",

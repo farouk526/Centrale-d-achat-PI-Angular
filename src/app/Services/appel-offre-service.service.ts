@@ -35,17 +35,16 @@ export class AppelOffreServiceService {
   }
   addAppelOffre (appelOffre: AppelOffre): Observable<AppelOffre> {
     return this.http.post<AppelOffre>(this.url+"/add", appelOffre,
-    this.httpOptions).pipe(
-      tap(()=>{
-        this._refresh$.next()
-      }
-      ));
+    this.httpOptions);
     console.log("appeloffre ajoutee");
   }
   deleteAppelOffre (appelOffre: AppelOffre | number):
 Observable<AppelOffre> { const id = typeof appelOffre === 'number'
-? appelOffre : appelOffre.idAppelOffre; const url=this.url+'/'+id;
-return this.http.delete<AppelOffre>(url);
+? appelOffre : appelOffre.id; 
+//const url=this.url+'/delete'+id;
+//return this.http.delete<AppelOffre>(url);
+const url = `${this.url}/delete/${id}`;
+  return this.http.delete<AppelOffre>(url, this.httpOptions);
 }
 
 getAppelOffreById(id: number): Observable<AppelOffre> {

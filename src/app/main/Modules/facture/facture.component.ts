@@ -2,22 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { CoreConfigService } from '@core/services/config.service';
-import { Commande } from 'app/Model/Commande';
-import { CommandeServiceService } from 'app/Services/commande-service.service';
 import { Facture } from 'app/Model/Facture';
 import { FactureService } from 'app/Services/facture.service';
 
+
 @Component({
-  selector: 'app-commande',
-  templateUrl: './commande.component.html',
-  styleUrls: ['./commande.component.scss']
+  selector: 'app-facture',
+  templateUrl: './facture.component.html',
+  styleUrls: ['./facture.component.scss']
 })
-export class CommandeComponent implements OnInit {
- Factures:Facture[];
-  Commandes: Commande[];
-  commande:Commande;
+export class FactureComponent implements OnInit {
+
+  Factures: Facture[];
+  facture:Facture;
   public contentHeader: object;  
-  constructor(private _coreSidebarService: CoreSidebarService ,private cs:CommandeServiceService, private fs:FactureService,private route:Router,  private _coreConfigService: CoreConfigService) { 
+  constructor(private _coreSidebarService: CoreSidebarService ,private fs:FactureService, private route:Router,  private _coreConfigService: CoreConfigService) { 
     
     this._coreConfigService.config = {
       layout: {
@@ -43,9 +42,8 @@ export class CommandeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFacture(); 
-    this.getCommande(); 
     this.contentHeader = {
-      headerTitle: '  Commandes',
+      headerTitle: '  Factures',
       actionButton: true,
       breadcrumb: {
         type: '',
@@ -57,17 +55,21 @@ export class CommandeComponent implements OnInit {
         ]
       }
     };
-    this.commande = new Commande();
+    this.facture = new Facture();
     
-    this.cs.GetAllCommande().subscribe((data: Commande[]) => {
-      this.Commandes = data;
-    });
-
     this.fs.GetAllFacture().subscribe((data: Facture[]) => {
       this.Factures = data;
     });
   }
 
+  delete(id: number): void  {
+    this.fs.deleteFacture(id).subscribe((data) => {
+      console.log('Facture supprimé !');
+      
+      this.getFacture();
+      location.reload();
+  })
+}
   public getFacture(): void {
     this.fs.GetAllFacture().subscribe((data )=> {
       this.fs.FACTURES = data 
@@ -75,25 +77,10 @@ export class CommandeComponent implements OnInit {
     });
     
   }
-  delete(id: number): void  {
-    this.cs.deleteCommande(id).subscribe((data) => {
-      console.log('Commande supprimé !');
-      
-      this.getCommande();
-      location.reload();
-  })
-}
-  public getCommande(): void {
-    this.cs.GetAllCommande().subscribe((data )=> {
-      this.cs.COMMANDES = data 
-  
-    });
-    
-  }
   save() : void {
-    this.cs.addCommande(this.commande).subscribe ((res) => {
-    console.log('commande ajouté !');
-    this.route.navigateByUrl('/commande');})
+    this.fs.addFacture(this.facture).subscribe ((res) => {
+    console.log('facture ajouté !');
+    this.route.navigateByUrl('/facture');})
         ;
         location.reload();
   }

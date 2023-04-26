@@ -24,6 +24,7 @@ import { ContentHeaderModule } from "./layout/components/content-header/content-
 import { FormsModule, ReactiveFormsModule, NgForm } from "@angular/forms";
 import { DatePipe } from '@angular/common'
 import { HomeAnimationComponent } from "./main/Components/HomeAnimation/animation.component";
+import { FactureComponent } from './main/Modules/facture/facture.component';
 
 const appRoutes: Routes = [];
 
