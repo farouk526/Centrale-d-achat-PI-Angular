@@ -1,0 +1,38 @@
+<h3>List Of Orders </h3>
+<div id="content" #content> 
+    <table class="table" >
+        <thead>
+          <tr>
+            <th >Id</th>
+            <th >clientcin</th>
+            <th >client</th>
+            <th >respClient</th>
+            <th >adresseclient</th>
+            <th >devise</th>
+            <th >dateCreation</th>
+            <th >totalttc</th>
+            <th >Facture</th>
+            <th >Archive</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor="let commande of Commandes">
+              <td>{{commande.id}}</td>
+              <td>{{commande.clientcin}}</td>
+              <td> {{commande.client}} </td>
+              <td> {{commande.reponsableclient}} </td>
+              <td> {{commande.adresseclient}} </td>
+              <td> {{commande.devise}} </td>
+              <td> {{commande.dateCreation}} </td>
+              <td> {{commande.totalttc}} </td>
+              <td> {{commande.facture.client}} </td>
+           
+              <td *ngIf=" commande.archive =='1'" [ngStyle]="{'color':'green'}">Accepte</td>
+              <td *ngIf=" commande.archive =='0'" [ngStyle]="{'color':'red'}">Refusé</td>
+              
+             
+          </tr>
+      </tbody>
+      </table>
+  </div>

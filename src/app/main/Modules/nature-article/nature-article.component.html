@@ -1,0 +1,57 @@
+<h3>List Of NatureArticles</h3>
+<div id="content" #content> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Secteur</th>
+        <th>Description</th>
+        <th>unite</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let naturearticle of Naturearticles">
+        <td>{{naturearticle.id}}</td>
+        <td>{{naturearticle.secteur}}</td>
+        <td>{{naturearticle.description}}</td>
+        <td>{{naturearticle.unite}}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="goToUpdateNatureArticle(naturearticle.id)">Update</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(naturearticle.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Add NatureArticle</h3>
+<div class="container">
+  <form #f="ngForm">
+    <p></p>
+    <div class="form-group">
+      <label>Secteur</label>
+      <input type="text" name="secteur" class="form-control" [(ngModel)]="naturearticle.secteur" #s="ngModel" required minlength="3">
+      <div class="alert alert-danger" *ngIf="s.invalid && s.touched">
+        <div *ngIf="s.errors?.['required']">Le secteur est obligatoire</div>
+        <div *ngIf="s.errors?.['minlength']">Le secteur doit contenir au moins 3 caractères</div>
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" name="description" class="form-control" [(ngModel)]="naturearticle.description" #d="ngModel" required>
+      <div class="alert alert-danger" *ngIf="d.invalid && d.touched">La description est obligatoire</div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>unite</label>
+      <input type="text" name="unite" class="form-control" [(ngModel)]="naturearticle.unite" #u="ngModel" required>
+      <div class="alert alert-danger" *ngIf="u.invalid && u.touched">L'unite est obligatoire</div>
+    </div>
+    <p></p>
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="save()">
+        Add
+    </button>
+  </form>
+</div>
