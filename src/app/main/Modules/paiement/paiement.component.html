@@ -1,0 +1,84 @@
+<h3>List Of Paiements</h3>
+<div id="content" #content> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Prix</th>
+        <th>Pays</th>
+        <th>Devise</th>
+        <th>Methode</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paiement of paiements">
+        <td>{{paiement.id}}</td>
+        <td>{{paiement.prix}}</td>
+        <td>{{paiement.pays}}</td>
+        <td>{{paiement.devise}}</td>
+        <td>{{paiement.methode}}</td>
+        <td>{{paiement.description}}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="goToUpdatePaiement(paiement.id)">Update</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(paiement.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h3>Add Paiement</h3>
+<div class="container">
+  <form #f="ngForm">
+    <p></p>
+    <div class="form-group">
+      <label>Prix</label>
+      <input type="number" name="prix" class="form-control" [(ngModel)]="paiement.prix" #p="ngModel" required min="0">
+      <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+        <div *ngIf="p.errors?.['required']">Le prix est obligatoire</div>
+        <div *ngIf="p.errors?.['min']">Le prix doit être supérieur ou égal à 0</div>
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Pays</label>
+      <input type="text" name="pays" class="form-control" [(ngModel)]="paiement.pays" #y="ngModel" required minlength="3">
+      <div class="alert alert-danger" *ngIf="y.invalid && y.touched">
+        <div *ngIf="y.errors?.['required']">Le pays est obligatoire</div>
+        <div *ngIf="y.errors?.['minlength']">Le pays doit contenir au moins 3 caractères</div>
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Devise</label>
+      <input type="text" name="devise" class="form-control" [(ngModel)]="paiement.devise" #d="ngModel" required>
+      <div class="alert alert-danger" *ngIf="d.invalid && d.touched">La devise est obligatoire</div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Methode</label>
+    
+        <select class="form-select" aria-label="Default select example" name="methode" [(ngModel)]="paiement.methode" id="methode">
+          <option selected>Choose methode</option>
+          <option value="0">CASH</option>
+          <option value="1">CHEQUE</option>
+        </select>
+      </div>
+    <p></p>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="description" class="form-control" [(ngModel)]="paiement.description" #d="ngModel" required minlength="3">
+        <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+          <div *ngIf="d.errors?.['required']">La description est obligatoire</div>
+          <div *ngIf="d.errors?.['minlength']">La description doit contenir au moins 3 caractères</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="save()">
+          Add
+      </button>
+    
+    </form>
+    
+    </div>
+    <p></p>
