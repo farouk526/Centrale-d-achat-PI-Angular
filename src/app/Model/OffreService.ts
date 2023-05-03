@@ -2,7 +2,7 @@ export class OffreService {
     id: number
     nom: string
     heures: number
-    disponibilité: boolean
-    photo: string
+    disponibilite: boolean
+    image: string
     prixparheure: number
   }

@@ -24,12 +24,19 @@ import { ContentHeaderModule } from "./layout/components/content-header/content-
 import { FormsModule, ReactiveFormsModule, NgForm } from "@angular/forms";
 import { DatePipe } from '@angular/common'
 import { HomeAnimationComponent } from "./main/Components/HomeAnimation/animation.component";
-import { FactureComponent } from './main/Modules/facture/facture.component';
-
-const appRoutes: Routes = [];
+import { CartComponent } from './main/Modules/cart/cart.component';
+import { AuthGuard } from "./auth/helpers";
+import { FakeDbService } from '@fake-db/fake-db.service';
+import { fakeBackendProvider } from "./auth/helpers/fake-backend";
+import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+const appRoutes: Routes = [ {
+  path: 'app',
+  loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule),
+  canActivate: [AuthGuard]
+},];
 
 @NgModule({
-  declarations: [AppComponent,HomeAnimationComponent],
+  declarations: [AppComponent,HomeAnimationComponent, CartComponent],
   imports: [
     CommonModule,
     ContentHeaderModule,
@@ -41,6 +48,10 @@ const appRoutes: Routes = [];
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(FakeDbService, {
+      delay: 0,
+      passThruUnknownUrl: true
+    }),
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled", // Add options right here
       relativeLinkResolution: "legacy",
@@ -59,10 +70,11 @@ const appRoutes: Routes = [];
     AppRoutingModule,
     // App modules
     LayoutModule,
+    ReactiveFormsModule
   ],
 
   bootstrap: [AppComponent],
   exports: [ReactiveFormsModule, FormsModule],
-  providers:[DatePipe]
+  providers:[DatePipe,fakeBackendProvider]
 })
 export class AppModule {}

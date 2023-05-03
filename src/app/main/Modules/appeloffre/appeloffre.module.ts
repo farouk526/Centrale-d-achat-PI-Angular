@@ -11,7 +11,6 @@ import { CoreCommonModule } from "@core/common.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 
-
 @NgModule({
   declarations: [AppelOffreComponent],
   imports: [CommonModule, AppeloffreRoutingModule, NgbModule,

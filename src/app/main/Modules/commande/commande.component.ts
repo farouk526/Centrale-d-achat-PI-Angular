@@ -24,7 +24,7 @@ export class CommandeComponent implements OnInit {
         navbar: {
           hidden: false
         },
-      skin:'dark',
+     
         menu: {
           hidden: false
         },
@@ -67,7 +67,7 @@ export class CommandeComponent implements OnInit {
       this.Factures = data;
     });
   }
-
+ 
   public getFacture(): void {
     this.fs.GetAllFacture().subscribe((data )=> {
       this.fs.FACTURES = data 

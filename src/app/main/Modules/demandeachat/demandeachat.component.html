@@ -1,0 +1,96 @@
+<h3>List Of DemandeAchat</h3>
+<div id="content" #content> 
+<table class="table" >
+    <thead>
+      <tr>
+        <th >Id</th>
+        <th >Nom</th>
+        <th >Objet</th>
+        <th >Description</th>
+        <th >Quantité Min</th>
+        <th >Offre Type</th>
+        <th >Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let demandeAchat of DemandesAchats">
+            <td>{{demandeAchat.id}}</td>
+            <td>{{demandeAchat.nom}}</td>
+            <td> {{demandeAchat.objet}} </td>
+            <td> {{demandeAchat.description}} </td>
+            <td> {{demandeAchat.quantiteMin}} </td>
+            <td> {{demandeAchat.offreType}} </td>
+           
+           
+            <td>
+              <button class="btn btn-sm btn-warning" (click)= "goToUpdateDemandeAchat(demandeAchat.id)">
+                Update
+              </button>
+                <button class="btn btn-sm btn-danger" (click)="delete(demandeAchat.id)" >
+                    Delete
+                </button>
+      
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h3>Add DemandeAchat</h3>
+<div class="container">
+  <form #f="ngForm">
+      <p></p>
+      <div class="form-group">
+          <label>Nom</label>
+          <input type="text" name="nom" class="form-control" [(ngModel)]="demandeAchat.nom" #n="ngModel" required minlength="3">
+          <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+          <div *ngIf="n.errors?.['required']"> 
+              le nom est obligatoire
+          </div>
+          <div *ngIf="n.errors?.['minlength']">
+              le nom contient au minimum 3 caractères
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <div class="form-group">
+          <label>objet</label>
+          <input type="text" name="objet" class="form-control" [(ngModel)]="demandeAchat.objet" #p="ngModel" required> 
+          <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+          l'objet est obligatoire
+        </div>
+      </div>
+      <p></p>
+      <div class="form-group">
+        <label>description</label>
+        <input type="text" name="description" class="form-control" [(ngModel)]="demandeAchat.description" #ps="ngModel" required>
+      <div class="alert alert-danger" *ngIf="ps.invalid && ps.touched">
+        la description est obligatoire
+      </div>
+    </div>
+      <p></p>
+      
+    <div class="form-group">
+    <label>quantiteMin</label>
+    <input type="number" name="quantiteMin" class="form-control" [(ngModel)]="demandeAchat.quantiteMin" #qm="ngModel" required>
+  <div class="alert alert-danger" *ngIf="qm.invalid && qm.touched">
+    la quantité est obligatoire
+</div>
+</div>
+<p></p>
+<div class="mb-3">
+    <label for="offreType" class="form-label">OffreType</label>
+    <select class="form-select" aria-label="Default select example" name="offreType" [(ngModel)]="demandeAchat.offreType" id="demandeAchat">
+      <option selected>Choose OffreType</option>
+      <option value="0">PRODUIT</option>
+      <option value="1">SERVICE</option>
+    </select>
+  </div>
+<p></p>
+  <button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="save()">
+      Add
+  </button>
+
+</form>
+
+</div>
+<p></p>

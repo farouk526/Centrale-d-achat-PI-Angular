@@ -51,7 +51,7 @@ getAppelOffreById(id: number): Observable<AppelOffre> {
   return this.http.get<AppelOffre>(this.url +'/'+ id); }
  
 updateAppelOffre (id: number, appelOffre: AppelOffre): Observable<AppelOffre> {
-    return this.http.put<AppelOffre>(this.url+'/'+ id, appelOffre,
+    return this.http.put<AppelOffre>(this.url+'/edit'+ id, appelOffre,
     this.httpOptions);
     }
 }

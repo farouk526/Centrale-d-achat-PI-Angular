@@ -7,4 +7,5 @@ export class ItemCommande {
     priceHt: number
     montantHt: number
     montantTtc: number
+    montantTotalHT: number
     }

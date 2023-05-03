@@ -21,7 +21,7 @@ constructor(private _coreSidebarService: CoreSidebarService ,private as:AppelOff
       navbar: {
         hidden: false
       },
-    
+      skin:'dark',
       menu: {
         hidden: false
       },
@@ -81,5 +81,10 @@ constructor(private _coreSidebarService: CoreSidebarService ,private as:AppelOff
     this.route.navigateByUrl('/appeloffre');})
         ;
         location.reload();
+  }
+  goToUpdateAppelOffre(id: number): void {
+    const url = `/update-appeloffre/${id}`;
+  console.log(url);
+  this.route.navigate([url]);
   }
 }

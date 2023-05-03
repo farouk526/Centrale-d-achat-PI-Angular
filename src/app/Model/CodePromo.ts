@@ -1,4 +1,4 @@
-export class AutreCharge {
+export class CodePromo {
     id: number
     code: string
     remise: number

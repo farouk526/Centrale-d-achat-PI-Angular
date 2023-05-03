@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Commande } from 'app/Model/Commande';
+import { MontantPanier } from 'app/Model/MontantPanier';
+import { Panier } from 'app/Model/Panier';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -51,4 +53,9 @@ updateCommande (id: number, commande: Commande): Observable<Commande> {
     return this.http.put<Commande>(this.url+'/'+ id, commande,
     this.httpOptions);
     }
+   
+    
+      calculMontantPanier(panier: Panier): Observable<MontantPanier> {
+        return this.http.post<MontantPanier>(this.url+'/montant-panier', panier);
+      }
 }

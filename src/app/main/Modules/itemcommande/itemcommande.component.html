@@ -1,0 +1,109 @@
+<h3>List Of ItemCommandes </h3>
+<div id="content" #content> 
+  <table class="table" >
+    <thead>
+      <tr>
+        <th >Id</th>
+        <th >Code</th>
+        <th >Label</th>
+        <th >Quantity</th>
+        <th >TVA</th>
+        <th >Price HT</th>
+        <th >Montant HT</th>
+        <th >Montant TTC</th>
+        <th >Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let itemCommande of ItemCommandes">
+        <td>{{itemCommande.id}}</td>
+        <td>{{itemCommande.code}}</td>
+        <td> {{itemCommande.label}} </td>
+        <td> {{itemCommande.quantity}} </td>
+        <td> {{itemCommande.tva}} </td>
+        <td> {{itemCommande.priceHt}} </td>
+        <td> {{itemCommande.montantHt}} </td>
+        <td> {{itemCommande.montantTtc}} </td>
+        <td>
+          <button class="btn btn-sm btn-success" (click)="calculateMontantPanier()">
+            panier
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="delete(itemCommande.id)" >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Add ItemCommande</h3>
+<div class="container">
+  <form #f="ngForm">
+    <p></p>
+    <div class="form-group">
+      <label>Code</label>
+      <input type="text" name="code" class="form-control" [(ngModel)]="itemCommande.code" #c="ngModel" required minlength="3">
+      <div class="alert alert-danger" *ngIf="c.invalid && c.touched">
+        <div *ngIf="c.errors?.['required']"> 
+          Le code est obligatoire.
+        </div>
+        <div *ngIf="c.errors?.['minlength']">
+          Le code doit contenir au moins 3 caractères.
+        </div>
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Label</label>
+      <input type="text" name="label" class="form-control" [(ngModel)]="itemCommande.label" #l="ngModel" required> 
+      <div class="alert alert-danger" *ngIf="l.invalid && l.touched">
+        Le label est obligatoire.
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Quantity</label>
+      <input type="number" name="quantity" class="form-control" [(ngModel)]="itemCommande.quantity" #q="ngModel" required>
+      <div class="alert alert-danger" *ngIf="q.invalid && q.touched">
+        La quantité est obligatoire.
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>TVA</label>
+      <input type="number" name="tva" class="form-control" [(ngModel)]="itemCommande.tva" #tva="ngModel" required>
+      <div class="alert alert-danger" *ngIf="tva.invalid && tva.touched">
+        La TVA est obligatoire.
+      </div>
+    </div>
+    <div class="form-group">
+        <label>priceHt</label>
+        <input type="number" name="priceHt" class="form-control" [(ngModel)]="itemCommande.priceHt" #tt="ngModel" required>
+      <div class="alert alert-danger" *ngIf="tt.invalid && tt.touched">
+        le price ht est obligatoire
+      </div> 
+    </div>
+    <!--div class="form-group">
+        <label>montantHt</label>
+        <input type="number" name="montantHt" class="form-control" [(ngModel)]="itemCommande.montantHt" #mh="ngModel" required>
+      <div class="alert alert-danger" *ngIf="mh.invalid && mh.touched">
+        le montant ht est obligatoire
+      </div> 
+    </div>
+    <div class="form-group">
+        <label>montantTtc</label>
+        <input type="number" name="montantTtc" class="form-control" [(ngModel)]="itemCommande.montantTtc" #mt="ngModel" required>
+      <div class="alert alert-danger" *ngIf="mt.invalid && mt.touched">
+        le total TTC est obligatoire
+      </div> 
+    </div-->
+
+<button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="save()">
+    Add
+</button>
+
+</form>
+
+</div>
+<p></p>

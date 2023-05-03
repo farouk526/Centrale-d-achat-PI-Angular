@@ -9,7 +9,7 @@ const routes: Routes = [
     path: "",
     component: AppelOffreComponent, canActivate: [AuthGuard], data: { roles: ['User'] } 
     
-  },
+  }
 ];
 
 @NgModule({
