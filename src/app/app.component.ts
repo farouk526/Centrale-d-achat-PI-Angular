@@ -24,15 +24,20 @@ import { locale as menuPortuguese } from 'app/menu/i18n/pt';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
+  
 })
 export class AppComponent implements OnInit, OnDestroy {
   coreConfig: any;
   menu: any;
   defaultLanguage: 'en'; // This language will be used as a fallback when a translation isn't found in the current language
   appLanguage: 'en'; // Set application default language i.e fr
-
+  userService: any;
+  addRoleToUser(roleName: string, userName: string) {
+    this.userService.addRoleToUser(roleName, userName);
+  }
   // Private
   private _unsubscribeAll: Subject<any>;
+  
 
   /**
    * Constructor
@@ -103,6 +108,7 @@ export class AppComponent implements OnInit, OnDestroy {
       // ? Use app-config.ts file to set default language
       const appLanguage = this.coreConfig.app.appLanguage || 'en';
       this._translateService.use(appLanguage);
+      
 
       // ? OR
       // ? User the current browser lang if available, if undefined use 'en'

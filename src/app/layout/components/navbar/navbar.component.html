@@ -61,8 +61,11 @@
       >
         <div class="user-nav d-sm-flex d-none">
           <span class="user-name font-weight-bolder">{{ this.currentUser.userFirstName }} {{ this.currentUser.userLastName }} </span>
-          <span class="user-status"*ngIf=" this.currentUser.role[0].roleName =='User'">Operateur</span>
+          <span class="user-status"*ngIf=" this.currentUser.role[0].roleName =='User'">User</span>
           <span class="user-status"*ngIf=" this.currentUser.role[0].roleName =='Admin'">Admin</span>
+          <span class="user-status"*ngIf=" this.currentUser.role[0].roleName =='Operateur'">operateur</span>
+          <span class="user-status"*ngIf=" this.currentUser.role[0].roleName =='Fournisseur'">Fournisseur</span>
+
         </div>
         <span class="avatar"
           ><img

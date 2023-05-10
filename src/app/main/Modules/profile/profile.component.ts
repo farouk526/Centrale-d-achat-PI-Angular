@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   userName:string;
   userFirstName:string;
   userLastName:string;
+  
   public currentUser: User;
   public contentHeader: object;
   public data: any;
@@ -76,7 +77,10 @@ export class ProfileComponent implements OnInit {
     this.updateForm = new FormGroup({
       userName: new FormControl(this.currentUser.userName),
       userFirstName: new FormControl(this.currentUser.userFirstName),
-      userLastName: new FormControl(this.currentUser.userLastName)
+      userLastName: new FormControl(this.currentUser.userLastName),
+      userEmail: new FormControl(this.currentUser.userEmail)
+      
+
     });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.contentHeader = {
@@ -103,6 +107,8 @@ export class ProfileComponent implements OnInit {
     console.log('this.user:', this.currentUser);
     this.currentUser.userFirstName=this.updateForm.value.userFirstName;
     this.currentUser.userLastName=this.updateForm.value.userLastName;
+    this.currentUser.userEmail=this.updateForm.value.userEmail;
+
     localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
     console.log('this.user:', this.currentUser);
    

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'environments/environment';
-import { User } from 'app/auth/models';
+import { Role, User } from 'app/auth/models';
 import { AuthenticationService } from './authentication.service';
 import { map } from 'rxjs/operators';
 
@@ -48,11 +48,15 @@ export class UserService {
   public count() {
     return this._http.get<number>(this.PATH_OF_API + `/count`,this.httpOptions);
   }
-  public countoperateur() {
-    return this._http.get<number>(this.PATH_OF_API + `/countoperateur`,this.httpOptions);
+  public countmoderateur() {
+    return this._http.get<number>(this.PATH_OF_API + `/countmoderateur`,this.httpOptions);
   }
+  
   public countadmin() {
     return this._http.get<number>(this.PATH_OF_API + `/countadmin`,this.httpOptions);
+  }
+  public countfournisseur() {
+    return this._http.get<number>(this.PATH_OF_API + `/countfournisseur`,this.httpOptions);
   }
   
   public roleMatch(allowedRoles): boolean {
@@ -72,4 +76,33 @@ export class UserService {
       }
     }
   }
+  
+  addRoleToUser(roleName: string, userName: string) {
+
+
+    // Make HTTP requests to get the role and user objects
+    /*this._http.get<Role>(roleUrl).subscribe(role => {
+      this._http.get<User>(userUrl).subscribe(user => {
+        // Add the new role to the user's roles and save the changes
+        const newRoles = new Set<Role>();
+        newRoles.add(role);
+        user.roles= newRoles;*/
+       
+      
+       
+       return this._http.put(this.PATH_OF_API + `/addRole/${roleName}/${userName}`,this.httpOptions);
+   
+  }
+  activateAccount(verificationToken: string) {
+    const url = `${this.PATH_OF_API}/activate/${verificationToken}`;
+    return this._http.put(url, {}).subscribe(
+      (response) => {
+        console.log('Account activated successfully');
+      },
+      (error) => {
+        console.log('Error activating account');
+      }
+    );
+  }
+  
 }

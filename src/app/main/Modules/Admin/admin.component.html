@@ -38,7 +38,7 @@
         </div>
       </div>
       <!-- end users count   -->
-      <!-- operateur count   -->
+      <!-- moderateur count   -->
       <div class="col-xl-4 col-md-4 col-sm-6">
         <div class="card text-center">
           <div class="card-body">
@@ -47,8 +47,8 @@
                 <i data-feather="user" class="font-medium-6"></i>
               </div>
             </div>
-            <h2 class="font-weight-bolder">{{ co }}</h2>
-            <p class="mb-0 line-ellipsis">Operateurs</p>
+            <h2 class="font-weight-bolder">{{ cm }}</h2>
+            <p class="mb-0 line-ellipsis">Moderateurs</p>
           </div>
         </div>
       </div>
@@ -68,8 +68,24 @@
         </div>
       </div>
       <!-- end Admin count   -->
+   
+      <!-- Fournisseur count   -->
+      <div class="col-xl-4 col-md-4 col-sm-6">
+        <div class="card text-center">
+          <div class="card-body">
+            <div class="avatar bg-light-warning p-50 m-0 mb-1">
+              <div class="avatar-content">
+                <i data-feather="user" class="font-medium-6"></i>
+              </div>
+            </div>
+            <h2 class="font-weight-bolder">{{ cf }}</h2>
+            <p class="mb-0 line-ellipsis">Fournisseurs</p>
+          </div>
+        </div>
+      </div>
+      <!-- end Admin count   -->
+      <!-- end Admin count   -->
     </div>
-      
         <!-- users filter start 
         <div class="card">
           
@@ -122,8 +138,12 @@
                             <th>UserName</th>
                             <th>Last Name</th>
                             <th>First Name</th>
+                            <th>Email</th>
                             <th>Role</th>
                             <th>Action</th>
+                            <th>Add Role to User</th>    
+                        
+
                         </tr>
                     </thead>
                     <tbody>
@@ -132,18 +152,42 @@
                             <td>{{user.userFirstName}}</td>
                             <td> {{user.userLastName}}
                             </td>
-                            <td *ngIf=" user.role[0].roleName =='User'" [ngStyle]="{'color':'green'}">Operateur</td>
+                            <td> {{user.userEmail}}
+                            </td>
+                            <td *ngIf=" user.role[0].roleName =='User'" [ngStyle]="{'color':'green'}">User</td>
                             <td *ngIf=" user.role[0].roleName =='Admin'" [ngStyle]="{'color':'red'}">Admin</td>
+                            <td *ngIf=" user.role[0].roleName =='Moderateur'" [ngStyle]="{'color':'blue'}">Moderateur</td>
+                            <td *ngIf=" user.role[0].roleName =='Fournisseur'" [ngStyle]="{'color':'purple'}">Fournisseur</td>
+                            
                             
                             <td>
                                 <button class="btn btn-sm btn-danger" (click)="delete(user.userName)" >
                                     Delete
+
+
                                 </button>
+                                
 
                             </td>
+                            <td>
+                              <label for="roleName">Role Name:</label>
+                              <input  [(ngModel)]="roleName" type="text" id="roleName" name="roleName">
+                              
+                              <label for="userName">User Name:</label>
+                              <input [(ngModel)]="user.userName" type="text" id="userName" name="userName">
+                              
+                              <button (click)="addRoleToUser(roleName, user.userName)">Add Role</button> 
+                              
+                            </td>
+
+       
+
                         </tr>
+                        
                     </tbody>
                 </table>
+
+                
                 </div>
           
         </div>

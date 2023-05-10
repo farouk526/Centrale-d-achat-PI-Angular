@@ -13,15 +13,24 @@ export class AdminComponent implements OnInit {
 user:User;
 userList:User[];
 c:number;
-co:number;
+cm:number;
 ca:number;
+cf:number;
+roleName:string;
+
+
+
+
 public currentUser: User;
 public contentHeader: object;
 count=this.userService.count().subscribe((data: number) => {
   this.c = data;
 });
-countoperateur=this.userService.countoperateur().subscribe((data: number) => {
-  this.co = data;
+countmoderateur=this.userService.countmoderateur().subscribe((data: number) => {
+  this.cm = data;
+});
+countfournisseur=this.userService.countfournisseur().subscribe((data: number) => {
+  this.cf = data;
 });
 countadmin=this.userService.countadmin().subscribe((data: number) => {
   this.ca = data;
@@ -61,6 +70,18 @@ countadmin=this.userService.countadmin().subscribe((data: number) => {
       this.userService.getAll();
       location.reload();
     
+  })
+}
+addRoleToUser(roleName:string,userName:string){
+ 
+  this.userService.addRoleToUser(roleName,userName).subscribe((data) => {
+    console.log(data);
+    
+    location.reload();
+    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    console.log('this.user:', this.currentUser);
+
+    //console.log(this.roleName)
   })
 }
 

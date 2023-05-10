@@ -39,10 +39,12 @@ export class UserRegisterService {
   public getuser_last_name(): string {
     return localStorage.getItem('user_last_name');
   }
+  
   //
   public clear() {
     localStorage.clear();
   }
+  
 
 
 }

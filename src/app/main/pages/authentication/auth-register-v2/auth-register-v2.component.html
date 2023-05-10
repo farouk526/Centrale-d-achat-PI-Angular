@@ -139,6 +139,24 @@
                         >
                         <div class="invalid-feedback" *ngIf="userFirstName.invalid && userFirstName.touched ">First Name required.</div>
                       </div>
+
+
+                     <label class="form-label" for="login-email">mail</label>
+                        <div class="form-group mb-3">
+                        <input type="text"
+                        required
+                        ngModel 
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid':userEmail.invalid && userEmail.touched }"
+                        #userEmail="ngModel"
+                        name="userEmail"
+                        id="userEmail"
+                        placeholder="Enter your mail name"
+                        class="form-control "
+                        >
+                        <div class="invalid-feedback" *ngIf="userEmail.invalid && userEmail.touched ">userEmail required.</div>
+                      </div>
+
                         <label class="form-label" for="login-email">Last Name</label>
                         <div class="form-group mb-3">
                         <input type="text"
@@ -154,6 +172,9 @@
                         >
                         <div class="invalid-feedback" *ngIf="userLastName.invalid && userLastName.touched ">Last Name required.</div>
                        
+
+
+                        
                       </div>
                       <label class="form-label" for="login-email">Password</label>
                         <div class="form-group mb-3">

@@ -90,7 +90,7 @@ export class AuthRegisterV2Component implements OnInit {
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
       username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      userEmail: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
 
