@@ -1,0 +1,41 @@
+<h3>List Of Reclamation </h3>
+
+<strong style="font-size: 30px;">Search</strong>
+<div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="search ">
+</div>
+<div id="content" #content>
+    <table class="table" >
+        <thead>
+        <tr>
+            <th >Id</th>
+            <th >description</th>
+            <th >email</th>
+            <th >reclamation</th>
+            <th >date</th>
+
+            <th >Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reclamation of Reclamation| filter:searchKey:'email' ">
+            <td>{{reclamation.id}}</td>
+            <td>{{reclamation.description}}</td>
+            <td> {{reclamation.email}} </td>
+            <td> {{reclamation.reclamationType}} </td>
+            <td> {{reclamation.date}} </td>
+
+            <td>
+
+
+                <button class="btn btn-sm btn-secondary"   (click)="update(reclamation.id)">
+                    update
+                </button>
+                <button class="btn btn-sm btn-danger"  (click)="delete(reclamation.id)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

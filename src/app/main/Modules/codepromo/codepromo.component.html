@@ -1,0 +1,48 @@
+<h3>List Of CodePromos</h3>
+<div id="content" #content> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Remise</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let codepromo of CodePromos">
+        <td>{{codepromo.id}}</td>
+        <td>{{codepromo.code}}</td>
+        <td>{{codepromo.remise}}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="goToUpdateCodePromo(codepromo.id)">Update</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(codepromo.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h3>Add CodePromo</h3>
+<div class="container">
+  <form #f="ngForm">
+    <p></p>
+    <div class="form-group">
+      <label>Code</label>
+      <input type="text" name="code" class="form-control" [(ngModel)]="codepromo.code" #c="ngModel" required minlength="3">
+      <div class="alert alert-danger" *ngIf="c.invalid && c.touched">
+        <div *ngIf="c.errors?.['required']">Le code est obligatoire</div>
+        <div *ngIf="c.errors?.['minlength']">Le code doit contenir au moins 3 caractères</div>
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>Remise</label>
+      <input type="number" name="remise" class="form-control" [(ngModel)]="codepromo.remise" #r="ngModel" required>
+      <div class="alert alert-danger" *ngIf="r.invalid && r.touched">La remise est obligatoire</div>
+    </div>
+    <p></p>
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="save()">
+        Add
+    </button>
+  </form>
+</div>

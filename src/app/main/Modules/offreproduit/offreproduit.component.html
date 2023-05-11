@@ -1,0 +1,92 @@
+<h3>List Of OffreProduits</h3>
+<div id="content" #content> 
+<table class="table" >
+    <thead>
+      <tr>
+        <th >Id</th>
+        <th >Disponibilité</th>
+        <th >Nom</th>
+        <th >Quantité</th>       
+        <th >image</th>
+        <th >Prix unitaire</th>
+        <th >Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let offreProduit of   OffreProduits">
+            <td>{{offreProduit.id}}</td>
+            <td> {{offreProduit.disponibilite}} </td>
+            <td>{{offreProduit.nom}}</td>
+            <td> {{offreProduit.quantite}} </td>     
+            <td> {{offreProduit.image}} </td>
+            <td> {{offreProduit.prixUnitaire}} </td>
+           
+           
+            <td>
+              <button class="btn btn-sm btn-warning" (click)= "goToUpdateOffreProduit(offreProduit.id)">
+                Update
+              </button>
+                <button class="btn btn-sm btn-danger" (click)="delete(offreProduit.id)" >
+                    Delete
+                </button>
+      
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h3>Add OffreProduit</h3>
+<div class="container">
+  <form #f="ngForm" enctype="multipart/form-data">
+      <p></p>
+      <div class="form-group">
+          <label>Nom</label>
+          <input type="text" name="nom" class="form-control" [(ngModel)]="offreProduit.nom" #n="ngModel" required minlength="3">
+          <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+          <div *ngIf="n.errors?.['required']"> 
+              Le nom est obligatoire
+          </div>
+          <div *ngIf="n.errors?.['minlength']">
+              Le nom doit contenir au minimum 3 caractères
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <div class="form-group">
+          <label>Quantité</label>
+          <input type="number" name="quantite" class="form-control" [(ngModel)]="offreProduit.quantite" #q="ngModel" required> 
+          <div class="alert alert-danger" *ngIf="q.invalid && q.touched">
+          La quantité est obligatoire
+        </div>
+      </div>
+      <p></p>
+      <div class="form-group">
+        <label>Disponibilité</label>
+        <select name="disponibilite" class="form-control" [(ngModel)]="offreProduit.disponibilite" #d="ngModel" required>
+            <option value="true">Disponible</option>
+            <option value="false">Non disponible</option>
+        </select>
+      <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+        La disponibilité est obligatoire
+      </div>
+    </div>
+    <p></p>
+      
+    <div class="form-group">
+        <label>image</label>
+        <input type="file" name="image" class="form-control" (change)="onFileSelected($event)" required>
+        <div class="alert alert-danger" *ngIf="imageInvalid">
+            La image est obligatoire
+        </div>
+        <img *ngIf="previewImage" [src]="previewImage" class="img-thumbnail" style="max-width: 200px;">
+    </div>
+    <p></p>
+    
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid || imageInvalid" (click)="save()">
+        Add
+    </button>
+</form>
+
+</div>
+
+<p>hello</p>

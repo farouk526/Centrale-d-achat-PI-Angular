@@ -1,0 +1,40 @@
+<h3 >Update Reclamation</h3>
+<div  class="container" >
+    <form #f="ngForm">
+        <p></p>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" class="form-control" [(ngModel)]="description" #c="ngModel" required minlength="3">
+            <div class="alert alert-danger" *ngIf="c.invalid && c.touched">
+                <div *ngIf="c.errors?.['required']">
+                    Le description est obligatoire.
+                </div>
+                <div *ngIf="c.errors?.['minlength']">
+                    Le description doit contenir au moins 3 caractères.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>email</label>
+            <input type="text" name="email" class="form-control" [(ngModel)]="email" #l="ngModel" required>
+            <div class="alert alert-danger" *ngIf="l.invalid && l.touched">
+                Le email est obligatoire.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Reclamation type</label>
+            <select [(ngModel)]="reclamationType">
+                <option value="SERVICE">SERVICE</option>
+                <option value="TECHNICAL">TECHNICAL</option>
+            </select>
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid" (click)="update()" >
+            update
+        </button>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <p></p>
+    <div class="form-group">
+      <label>clientcin</label>
+      <input type="text" formControlName="clientcin" class="form-control">
+      <div class="alert alert-danger" *ngIf="panierForm.get('clientcin').invalid && panierForm.get('clientcin').touched">
+        Le CIN est obligatoire et doit contenir au moins 8 caractères.
+      </div>
+    </div>
+    <p></p>
+    <div class="form-group">
+      <label>codePromo</label>
+      <input type="text" formControlName="codePromo" class="form-control">
+    </div>
+    <p></p>
+    <div formArrayName="items">
+      <div *ngFor="let item of panierForm ; let i=index">
+      
+        <div [formGroupName]="i">
+          <div class="form-group">
+            <label>quantity</label>
+            <input type="number" formControlName="quantity" class="form-control">
+            <div class="alert alert-danger" *ngIf="panierForm.get('quantity').invalid && panierForm.get('quantity').touched">
+              La quantité est obligatoire.
+            </div>
+          </div>
+          <div class="mb-3">
+          <label for="montantHt" class="form-label">montantHt</label>
+          <select class="form-select" aria-label="Default select example" name="montantHt" id="montantHt" [(ngModel)]="panierForm.montantHt" required>
+            <option *ngFor="let item of itemCommandes" [ngValue]="item">{{ item.montantHt }}</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="panierForm.controls['montantHt'].invalid && panierForm.controls['montantHt'].touched">
+            Montant HT is required.
+          </div>
+        </div>
+        <p></p>
+        <button type="submit" class="btn btn-warning" [disabled]="!panierForm.valid">
+            OK
+        </button>
+      </div>
+    </div>
+  </div>
+    </form>
+
+  
+    <div class="mt-4" *ngIf="montantPanier">
+      <h4>Montant du panier :</h4>
+      <p>Montant total HT : {{ montantPanier.montantTotalHT }}</p>
+      <p>Remise : {{ montantPanier.Remise }}</p>
+      <p>TVA : {{ montantPanier.TVA }}</p>
+      <p>Montant total à payer : {{ montantPanier.montantTotalAPayer }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,143 @@
+<h3>List Of offreServices</h3>
+<div id="content" #content> 
+<table class="table" >
+    <thead>
+      <tr>
+        <th >Id</th>
+        <th >Disponibilité</th>
+        <th >Nom</th>
+        <th >heures</th>       
+        <th >image</th>
+        <th >prixparheure</th>
+        <th >Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let offreService of   OffreServices">
+            <td>{{offreService.id}}</td>
+            <td> {{offreService.disponibilite}} </td>
+            <td>{{offreService.nom}}</td>
+            <td> {{offreService.heures}} </td>     
+            <td>
+              <img [src]="offreService.image" alt="offre service image" width="100" height="100">
+            </td>
+            
+            <td> {{offreService.prixparheure}} </td>
+           
+           
+            <td>
+              <button class="btn btn-sm btn-success" routerLink="/itemcommande">
+                Commande
+              </button>
+                <button class="btn btn-sm btn-danger" (click)="delete(offreService.id)" >
+                    Delete
+                </button>
+      
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<ng-template #modalVC let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="exampleModalCenterTitle">Add a new OffreService</h4>
+    <button type="button" class="close " (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true" style="color: red;">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus style="display: flex;justify-content: center">
+   
+
+    <div style="justify-content: center ; width: 80%;">
+    <form #form="ngForm"  (ngSubmit)="onSubmit(form)" >
+             
+     
+      <div class="form-group">
+        <br>
+        
+        <label for="es">Libelle Offfre Service</label>
+        <input
+          type="text"
+          class="form-control"
+          id="es"
+          required
+          pattern= "[A-Za-z0-9 ]{3,}"
+          [(ngModel)]="model.nom"
+          #nom="ngModel"
+          name="nom"
+          placeholder="Enter libelle"
+        />
+        
+        <div [hidden]="nom.valid || nom.pristine"
+         class="alert alert-danger" >Libelle is no less than 3 characters </div>
+      </div>
+      <div class="form-group">
+        <label for="es1">Heures de travail</label>
+        <input
+          type="number"
+          class="form-control"
+          id="es1"
+          required
+          [(ngModel)]="model.heures"
+          #heures="ngModel"
+          name="heures"
+          placeholder="Enter heures"
+        />
+        <div [hidden]="heures.valid || heures.pristine"
+        class="alert alert-danger">Missing heures </div>
+      </div>
+      <div class="form-group">
+        <label for="esD">Disponibilité</label>
+        <select name="disponibilite" class="form-control"  id="esD"  placeholder="Disponibilité de travail" [(ngModel)]="model.disponibilite" #d="ngModel" required>
+            <option value="true">Disponible</option>
+            <option value="false">Non disponible</option>
+        </select>
+      <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+        La disponibilité est obligatoire
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="es4">Picture</label>
+      <input
+      #img
+      required
+        type="file"
+        class="form-control"
+        id="es4"
+        ng2FileSelect [uploader]="uploader"
+        (change)="onFileSelect($event.target)"
+        name="image"
+        placeholder="No stock"
+      />
+     
+     
+     
+</div>
+   
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="alertWithSuccess()">
+      Add
+    </button>
+  
+  </form>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Accept click')" rippleEffect>
+     Back
+    </button>
+  </div>
+</ng-template>
+<a
+  type="button"
+  class="btn btn-warning"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  style="margin-left: 5%; margin-top:-5px;"
+  (click)="modalOpenVC(modalVC)"
+>
+  Ajouter
+</a>
+
